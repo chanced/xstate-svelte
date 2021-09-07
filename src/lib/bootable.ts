@@ -81,9 +81,11 @@ export function bootable<
 		State<TContext, TEvent, any, TTypestate>
 	>(service, ($service, set) => {
 		const sub = $service.subscribe(($state) => {
+			// todo: check to see if $state is set;
 			// if ($state.changed) {
 			set($state);
 			// }
+			return $state;
 		});
 		return () => {
 			sub.unsubscribe();
