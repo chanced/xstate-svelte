@@ -42,7 +42,6 @@ export function bootable<
 		Partial<Options<TContext, TEvent>> &
 		Partial<MachineOptions<TContext, TEvent>> = {}
 ) {
-	console.log(options);
 	const {
 		context: initialContext,
 		guards,
