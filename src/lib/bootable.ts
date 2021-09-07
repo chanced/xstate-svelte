@@ -50,7 +50,7 @@ export function bootable<
 		activities,
 		services,
 		delays,
-		state: rehydratedState,
+		state: initialState,
 		...interpreterOptions
 	} = options;
 	const machineConfig = {
@@ -70,9 +70,7 @@ export function bootable<
 	const interpreter = interpret(resolvedMachine, interpreterOptions);
 
 	const service = readable(interpreter, (set) => {
-		set(
-			interpreter.start(previousState ?? rehydratedState ? new State(rehydratedState) : undefined)
-		);
+		set(interpreter.start(previousState ?? initialState ? new State(initialState) : undefined));
 		return () => {
 			previousState = interpreter.state;
 			interpreter.stop();
