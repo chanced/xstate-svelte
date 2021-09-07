@@ -81,7 +81,8 @@ export function bootable<
 		State<TContext, TEvent, any, TTypestate>
 	>(service, ($service, set) => {
 		const sub = $service.subscribe(($state) => {
-			// todo: check to see if $state is set;
+			// todo: check to see if $state is set and restore the $state.changed check
+			// this is currently causing $state to be undefined when context subscribes
 			// if ($state.changed) {
 			set($state);
 			// }
