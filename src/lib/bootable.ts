@@ -64,13 +64,13 @@ export function bootable<
 		...machine.context,
 		...initialContext
 	}));
-	let hydratedState = initialState ? new State(initialState) : undefined;
+	let rehydrateState = initialState ? new State(initialState) : undefined;
 	const interpreter = interpret(resolvedMachine, interpreterOptions);
 
 	const service = readable(interpreter, (set) => {
-		set(interpreter.start(hydratedState));
+		set(interpreter.start(rehydrateState));
 		return () => {
-			hydratedState = interpreter.state;
+			rehydrateState = interpreter.state;
 			interpreter.stop();
 		};
 	});
