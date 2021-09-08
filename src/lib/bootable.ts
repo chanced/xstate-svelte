@@ -60,18 +60,17 @@ export function bootable<
 		services,
 		delays
 	};
-	let previousState: State<TContext, TEvent, StateSchema<any>, TTypestate> = undefined;
 	const resolvedMachine = machine.withConfig(machineConfig, () => ({
 		...machine.context,
 		...initialContext
 	}));
-	let rehydrateState = initialState ? new State(initialState) : undefined;
+	let hydratedState = initialState ? new State(initialState) : undefined;
 	const interpreter = interpret(resolvedMachine, interpreterOptions);
 
 	const service = readable(interpreter, (set) => {
-		set(interpreter.start(rehydrateState));
+		set(interpreter.start(hydratedState));
 		return () => {
-			rehydrateState = interpreter.state;
+			hydratedState = interpreter.state;
 			interpreter.stop();
 		};
 	});
