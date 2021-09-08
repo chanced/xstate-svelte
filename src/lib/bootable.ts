@@ -93,7 +93,7 @@ export function bootable<
 		};
 	});
 
-	const send = function (
+	function send(
 		event: SingleOrArray<Event<TEvent>> | SCXML.Event<TEvent>,
 		payload?: EventData | undefined
 	): State<TContext, TEvent, TStateSchema, TTypestate> {
@@ -102,8 +102,8 @@ export function bootable<
 			state = send(event, payload);
 		})();
 		return state;
-	};
-	const select = function <T>(
+	}
+	function select<T>(
 		selector: (emitted: State<TContext, TEvent, TStateSchema, TTypestate>) => T,
 		compare: (a: T, b: T) => boolean = defaultCompare
 	): Readable<T> {
@@ -116,7 +116,7 @@ export function bootable<
 			});
 		});
 		return selected;
-	};
+	}
 
 	const context = derived(state, ($state) => $state.context);
 
