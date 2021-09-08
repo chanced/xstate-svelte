@@ -30,6 +30,7 @@ interface Options<TContext extends object, TEvent extends EventObject> {
 	 */
 	state: StateConfig<TContext, TEvent>;
 }
+const defaultCompare = (a, b) => a === b;
 
 export function bootable<
 	TContext extends object,
@@ -118,8 +119,6 @@ export function bootable<
 	};
 
 	const context = derived(state, ($state) => $state.context);
-
-	const defaultCompare = (a, b) => a === b;
 
 	return { state, send, service, select, context };
 }
