@@ -1,6 +1,11 @@
 {
 	"name": "xstate-svelte",
 	"version": "0.0.1",
+	"license": "MIT",
+	"author": {
+		"name": "chance dinkins",
+		"email": "chanceusc@gmail.com"
+	},
 	"scripts": {
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
